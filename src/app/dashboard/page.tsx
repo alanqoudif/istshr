@@ -38,69 +38,47 @@ export default function Dashboard() {
   const upcomingSessions = [
     {
       id: '1',
-      counsellorName: 'Dr. Sarah Johnson',
+      counsellorName: 'د. سارة جونسون',
       counsellorImage: 'https://randomuser.me/api/portraits/women/44.jpg',
       date: '2023-06-15',
-      time: '10:00 AM',
-      duration: '50 minutes',
+      time: '10:00 صباحًا',
+      duration: '50 دقيقة',
     },
     {
       id: '2',
-      counsellorName: 'Dr. Michael Chen',
+      counsellorName: 'د. محمد الشمري',
       counsellorImage: 'https://randomuser.me/api/portraits/men/32.jpg',
       date: '2023-06-18',
-      time: '2:30 PM',
-      duration: '60 minutes',
+      time: '2:30 مساءً',
+      duration: '50 دقيقة',
     },
   ];
 
-  // Mock data for recommended experts
-  const recommendedExperts = [
+  // Mock data for recommended counsellors
+  const recommendedCounsellors = [
     {
       id: '1',
-      name: 'Dr. Emily Wilson',
-      image: 'https://randomuser.me/api/portraits/women/28.jpg',
-      field: 'Family Counselling',
+      name: 'د. فاطمة العلي',
+      image: 'https://randomuser.me/api/portraits/women/68.jpg',
+      specialty: 'الصحة النفسية',
       rating: 4.9,
       reviewCount: 124,
     },
     {
       id: '2',
-      name: 'Dr. Robert Martinez',
-      image: 'https://randomuser.me/api/portraits/men/54.jpg',
-      field: 'Career Guidance',
+      name: 'د. أحمد الخالدي',
+      image: 'https://randomuser.me/api/portraits/men/75.jpg',
+      specialty: 'التوجيه المهني',
       rating: 4.8,
       reviewCount: 98,
     },
     {
       id: '3',
-      name: 'Dr. Aisha Khan',
-      image: 'https://randomuser.me/api/portraits/women/36.jpg',
-      field: 'Mental Health',
+      name: 'د. نورة القحطاني',
+      image: 'https://randomuser.me/api/portraits/women/63.jpg',
+      specialty: 'العلاقات الأسرية',
       rating: 4.7,
-      reviewCount: 156,
-    },
-  ];
-
-  // Mock data for recent activity
-  const recentActivity = [
-    {
-      id: '1',
-      type: 'session',
-      description: 'Completed session with Dr. Sarah Johnson',
-      date: '2023-06-10',
-    },
-    {
-      id: '2',
-      type: 'forum',
-      description: 'Posted a question in Career Development forum',
-      date: '2023-06-08',
-    },
-    {
-      id: '3',
-      type: 'resource',
-      description: 'Downloaded "Stress Management Techniques" guide',
-      date: '2023-06-05',
+      reviewCount: 87,
     },
   ];
 
@@ -108,186 +86,190 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-blue-600">
-              استشر
-            </Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100">
-              <FaBell className="h-6 w-6" />
-            </button>
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                <FaUser className="h-5 w-5 text-blue-600" />
-              </div>
-              <span className="font-medium">{currentUser?.name}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/" className="text-2xl font-bold text-blue-600">
+                استشر
+              </Link>
+            </div>
+            <nav className="hidden md:flex space-x-8">
+              <Link
+                href="/dashboard"
+                className="text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-blue-600"
+              >
+                لوحة التحكم
+              </Link>
+              <Link
+                href="/counsellors"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+              >
+                المستشارون
+              </Link>
+              <Link
+                href="/community"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+              >
+                المجتمع
+              </Link>
+              <Link
+                href="/about"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+              >
+                عن المنصة
+              </Link>
+            </nav>
+            <div className="flex items-center space-x-4">
+              <Link href="/dashboard/profile" className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                {currentUser?.name?.charAt(0) || 'U'}
+              </Link>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar */}
-          <div className="w-full md:w-64 shrink-0">
-            <div className="bg-white rounded-lg shadow-sm p-4">
-              <nav className="space-y-1">
-                <Link
-                  href="/dashboard"
-                  className="flex items-center px-3 py-2 text-blue-600 bg-blue-50 rounded-md font-medium"
-                >
-                  <FaCalendarAlt className="mr-3 h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  href="/profile"
-                  className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
-                >
-                  <FaUser className="mr-3 h-5 w-5" />
-                  My Profile
-                </Link>
-                <Link
-                  href="/sessions/history"
-                  className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
-                >
-                  <FaHistory className="mr-3 h-5 w-5" />
-                  Session History
-                </Link>
-                <Link
-                  href="/community"
-                  className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
-                >
-                  <FaUsers className="mr-3 h-5 w-5" />
-                  Community
-                </Link>
-                <Link
-                  href="/settings"
-                  className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md"
-                >
-                  <FaCog className="mr-3 h-5 w-5" />
-                  Settings
-                </Link>
-              </nav>
-            </div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-gray-900">مرحبًا، {currentUser?.name || 'مستخدم'}</h1>
+          <p className="mt-1 text-gray-600">مرحبًا بك في لوحة التحكم الخاصة بك</p>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="mb-8">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">إجراءات سريعة</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link href="/counsellors">
+              <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center hover:bg-blue-50 transition-colors cursor-pointer">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                  <FaSearch className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">البحث عن مستشار</span>
+              </div>
+            </Link>
+            
+            <Link href="/dashboard/profile">
+              <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center hover:bg-blue-50 transition-colors cursor-pointer">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                  <FaUser className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">الملف الشخصي</span>
+              </div>
+            </Link>
+            
+            <Link href="/sessions/history">
+              <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center hover:bg-blue-50 transition-colors cursor-pointer">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                  <FaHistory className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">سجل الجلسات</span>
+              </div>
+            </Link>
+            
+            <Link href="/settings">
+              <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center justify-center hover:bg-blue-50 transition-colors cursor-pointer">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-3">
+                  <FaCog className="w-5 h-5" />
+                </div>
+                <span className="text-sm font-medium text-gray-900">الإعدادات</span>
+              </div>
+            </Link>
           </div>
+        </div>
 
-          {/* Main content */}
-          <div className="flex-1">
-            <div className="mb-6">
-              <h1 className="text-2xl font-bold text-gray-900">Welcome back, {currentUser?.name}!</h1>
-              <p className="text-gray-600">Here's what's happening with your account today.</p>
-            </div>
-
-            {/* Upcoming Sessions */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Upcoming Sessions</h2>
-                <Link href="/sessions" className="text-blue-600 hover:text-blue-500 text-sm font-medium">
-                  View all
-                </Link>
-              </div>
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                {upcomingSessions.length > 0 ? (
-                  <div className="divide-y divide-gray-200">
-                    {upcomingSessions.map((session) => (
-                      <div key={session.id} className="p-4 flex items-center justify-between">
-                        <div className="flex items-center">
-                          <img
-                            src={session.counsellorImage}
-                            alt={session.counsellorName}
-                            className="h-12 w-12 rounded-full object-cover"
-                          />
-                          <div className="ml-4">
-                            <h3 className="text-sm font-medium text-gray-900">{session.counsellorName}</h3>
-                            <p className="text-sm text-gray-500">
-                              {session.date} at {session.time} ({session.duration})
-                            </p>
-                          </div>
-                        </div>
-                        <Link href={`/sessions/${session.id}`}>
-                          <Button size="sm">Join Session</Button>
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-6 text-center">
-                    <p className="text-gray-500">No upcoming sessions</p>
-                    <Link href="/counsellors">
-                      <Button className="mt-3">Book a Session</Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Recommended Experts */}
-            <div className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Recommended Experts</h2>
-                <Link href="/counsellors" className="text-blue-600 hover:text-blue-500 text-sm font-medium">
-                  View all
-                </Link>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {recommendedExperts.map((expert) => (
-                  <div key={expert.id} className="bg-white rounded-lg shadow-sm p-4">
-                    <div className="flex items-center">
-                      <img
-                        src={expert.image}
-                        alt={expert.name}
-                        className="h-12 w-12 rounded-full object-cover"
-                      />
-                      <div className="ml-4">
-                        <h3 className="text-sm font-medium text-gray-900">{expert.name}</h3>
-                        <p className="text-sm text-gray-500">{expert.field}</p>
+        {/* Upcoming Sessions */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-medium text-gray-900">الجلسات القادمة</h2>
+            <Link href="/sessions" className="text-sm text-blue-600 hover:text-blue-800">
+              عرض الكل
+            </Link>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow overflow-hidden">
+            {upcomingSessions.length > 0 ? (
+              <div className="divide-y">
+                {upcomingSessions.map((session) => (
+                  <div key={session.id} className="p-4 flex items-center">
+                    <img
+                      src={session.counsellorImage}
+                      alt={session.counsellorName}
+                      className="w-12 h-12 rounded-full object-cover mr-4"
+                    />
+                    <div className="flex-1">
+                      <h3 className="font-medium">{session.counsellorName}</h3>
+                      <div className="flex items-center text-sm text-gray-500 mt-1">
+                        <FaCalendarAlt className="ml-1" />
+                        <span>{new Date(session.date).toLocaleDateString('ar-SA')}</span>
+                        <span className="mx-2">•</span>
+                        <span>{session.time}</span>
+                        <span className="mx-2">•</span>
+                        <span>{session.duration}</span>
                       </div>
                     </div>
-                    <div className="mt-4 flex items-center">
-                      <div className="flex items-center">
-                        <span className="text-yellow-400">★</span>
-                        <span className="ml-1 text-sm text-gray-700">{expert.rating}</span>
-                      </div>
-                      <span className="mx-2 text-gray-300">•</span>
-                      <span className="text-sm text-gray-500">{expert.reviewCount} reviews</span>
-                    </div>
-                    <div className="mt-4">
-                      <Link href={`/counsellors/${expert.id}`}>
-                        <Button variant="outline" fullWidth>
-                          View Profile
-                        </Button>
-                      </Link>
-                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => router.push(`/sessions/${session.id}`)}
+                    >
+                      التفاصيل
+                    </Button>
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Recent Activity */}
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold text-gray-900">Recent Activity</h2>
+            ) : (
+              <div className="p-8 text-center">
+                <p className="text-gray-500 mb-4">ليس لديك أي جلسات قادمة</p>
+                <Button onClick={() => router.push('/counsellors')}>
+                  البحث عن مستشار
+                </Button>
               </div>
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="divide-y divide-gray-200">
-                  {recentActivity.map((activity) => (
-                    <div key={activity.id} className="p-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{activity.description}</p>
-                          <p className="text-sm text-gray-500">{activity.date}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
-      </div>
+
+        {/* Recommended Counsellors */}
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-medium text-gray-900">مستشارون موصى بهم</h2>
+            <Link href="/counsellors" className="text-sm text-blue-600 hover:text-blue-800">
+              عرض الكل
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {recommendedCounsellors.map((counsellor) => (
+              <div key={counsellor.id} className="bg-white rounded-lg shadow overflow-hidden">
+                <div className="p-4">
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={counsellor.image}
+                      alt={counsellor.name}
+                      className="w-12 h-12 rounded-full object-cover ml-3"
+                    />
+                    <div>
+                      <h3 className="font-medium">{counsellor.name}</h3>
+                      <p className="text-sm text-gray-500">{counsellor.specialty}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <span className="text-yellow-400">★</span>
+                      <span className="ml-1 text-sm font-medium">{counsellor.rating}</span>
+                      <span className="ml-1 text-sm text-gray-500">({counsellor.reviewCount} تقييم)</span>
+                    </div>
+                  </div>
+                  <Button
+                    className="w-full"
+                    onClick={() => router.push(`/counsellors/${counsellor.id}`)}
+                  >
+                    عرض الملف الشخصي
+                  </Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
     </div>
   );
 } 

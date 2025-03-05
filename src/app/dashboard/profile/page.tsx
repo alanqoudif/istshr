@@ -28,7 +28,7 @@ export default function UserProfilePage() {
     // Mock user data
     const mockUserData = {
       id: 'user-123',
-      name: currentUser.name || 'Ahmed Mohammed',
+      name: currentUser.name || 'أحمد محمد',
       email: currentUser.email || 'ahmed@example.com',
       phone: '+966 50 123 4567',
       role: currentUser.role || UserRole.USER,
@@ -39,7 +39,7 @@ export default function UserProfilePage() {
         completed: 6
       },
       preferences: {
-        language: 'Arabic',
+        language: 'العربية',
         notifications: true,
         anonymousMode: false
       }
@@ -54,7 +54,7 @@ export default function UserProfilePage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading profile...</p>
+          <p className="mt-4 text-gray-600">جاري تحميل الملف الشخصي...</p>
         </div>
       </div>
     );
@@ -64,13 +64,13 @@ export default function UserProfilePage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-xl text-red-600">Error loading profile</p>
+          <p className="text-xl text-red-600">خطأ في تحميل الملف الشخصي</p>
           <Button 
             className="mt-4"
             onClick={() => router.push('/dashboard')}
             leftIcon={<FaArrowLeft />}
           >
-            Back to Dashboard
+            العودة إلى لوحة التحكم
           </Button>
         </div>
       </div>
@@ -93,25 +93,25 @@ export default function UserProfilePage() {
                 href="/dashboard"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                Dashboard
+                لوحة التحكم
               </Link>
               <Link
                 href="/counsellors"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                Find Experts
+                المستشارون
               </Link>
               <Link
                 href="/community"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                Community
+                المجتمع
               </Link>
               <Link
                 href="/about"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                About
+                عن المنصة
               </Link>
             </nav>
             <div className="flex items-center space-x-4">
@@ -129,16 +129,16 @@ export default function UserProfilePage() {
             href="/dashboard" 
             className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
           >
-            <FaArrowLeft className="mr-2" /> Back to Dashboard
+            <FaArrowLeft className="ml-2" /> العودة إلى لوحة التحكم
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900 mt-2">My Profile</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mt-2">الملف الشخصي</h1>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Profile Summary */}
           <Card className="lg:col-span-1">
             <CardHeader>
-              <CardTitle>Profile Information</CardTitle>
+              <CardTitle>معلومات الملف الشخصي</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col items-center mb-6">
@@ -147,32 +147,32 @@ export default function UserProfilePage() {
                 </div>
                 <h2 className="text-xl font-semibold">{user.name}</h2>
                 <p className="text-gray-500 text-sm mt-1">
-                  Member since {user.joinedDate.toLocaleDateString()}
+                  عضو منذ {user.joinedDate.toLocaleDateString('ar-SA')}
                 </p>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <FaEnvelope className="text-gray-400 mt-1 mr-3" />
+                  <FaEnvelope className="text-gray-400 mt-1 ml-3" />
                   <div>
-                    <p className="text-sm text-gray-500">Email</p>
+                    <p className="text-sm text-gray-500">البريد الإلكتروني</p>
                     <p className="font-medium">{user.email}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <FaPhone className="text-gray-400 mt-1 mr-3" />
+                  <FaPhone className="text-gray-400 mt-1 ml-3" />
                   <div>
-                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="text-sm text-gray-500">رقم الهاتف</p>
                     <p className="font-medium">{user.phone}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <FaUser className="text-gray-400 mt-1 mr-3" />
+                  <FaUser className="text-gray-400 mt-1 ml-3" />
                   <div>
-                    <p className="text-sm text-gray-500">Account Type</p>
-                    <p className="font-medium">{user.role}</p>
+                    <p className="text-sm text-gray-500">نوع الحساب</p>
+                    <p className="font-medium">{user.role === 'USER' ? 'مستخدم' : user.role === 'COUNSELLOR' ? 'مستشار' : 'مدير'}</p>
                   </div>
                 </div>
               </div>
@@ -180,9 +180,9 @@ export default function UserProfilePage() {
               <Button 
                 className="w-full mt-6"
                 leftIcon={<FaEdit />}
-                onClick={() => alert('Edit profile functionality will be implemented soon')}
+                onClick={() => alert('سيتم تنفيذ وظيفة تعديل الملف الشخصي قريبًا')}
               >
-                Edit Profile
+                تعديل الملف الشخصي
               </Button>
             </CardContent>
           </Card>
@@ -190,47 +190,47 @@ export default function UserProfilePage() {
           {/* Session History */}
           <Card className="lg:col-span-2">
             <CardHeader>
-              <CardTitle>Session History</CardTitle>
+              <CardTitle>سجل الجلسات</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-blue-50 rounded-lg p-4 text-center">
                   <p className="text-3xl font-bold text-blue-600">{user.sessions.total}</p>
-                  <p className="text-sm text-gray-600">Total Sessions</p>
+                  <p className="text-sm text-gray-600">إجمالي الجلسات</p>
                 </div>
                 <div className="bg-green-50 rounded-lg p-4 text-center">
                   <p className="text-3xl font-bold text-green-600">{user.sessions.completed}</p>
-                  <p className="text-sm text-gray-600">Completed</p>
+                  <p className="text-sm text-gray-600">مكتملة</p>
                 </div>
                 <div className="bg-yellow-50 rounded-lg p-4 text-center">
                   <p className="text-3xl font-bold text-yellow-600">{user.sessions.upcoming}</p>
-                  <p className="text-sm text-gray-600">Upcoming</p>
+                  <p className="text-sm text-gray-600">قادمة</p>
                 </div>
               </div>
               
               <div className="border rounded-lg overflow-hidden">
                 <div className="bg-gray-50 px-4 py-3 border-b">
-                  <h3 className="text-sm font-medium">Recent Sessions</h3>
+                  <h3 className="text-sm font-medium">الجلسات الأخيرة</h3>
                 </div>
                 <div className="divide-y">
                   {[1, 2, 3].map((_, index) => (
                     <div key={`session-${index}`} className="px-4 py-3 flex items-center justify-between">
                       <div>
-                        <p className="font-medium">Session with Dr. {['Sara Ahmed', 'Mohammed Al-Farsi', 'Layla Mahmoud'][index]}</p>
+                        <p className="font-medium">جلسة مع د. {['سارة أحمد', 'محمد الفارسي', 'ليلى محمود'][index]}</p>
                         <div className="flex items-center text-sm text-gray-500 mt-1">
-                          <FaCalendarAlt className="mr-1" />
+                          <FaCalendarAlt className="ml-1" />
                           <span>
-                            {new Date(Date.now() - (index + 1) * 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}
+                            {new Date(Date.now() - (index + 1) * 7 * 24 * 60 * 60 * 1000).toLocaleDateString('ar-SA')}
                           </span>
                           <span className="mx-2">•</span>
-                          <span>{['10:00 AM', '2:30 PM', '4:00 PM'][index]}</span>
+                          <span>{['10:00 صباحًا', '2:30 مساءً', '4:00 مساءً'][index]}</span>
                         </div>
                       </div>
                       <div>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           index === 0 ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                         }`}>
-                          {index === 0 ? 'Upcoming' : 'Completed'}
+                          {index === 0 ? 'قادمة' : 'مكتملة'}
                         </span>
                       </div>
                     </div>
@@ -241,9 +241,9 @@ export default function UserProfilePage() {
               <Button 
                 variant="outline"
                 className="w-full mt-4"
-                onClick={() => router.push('/sessions')}
+                onClick={() => router.push('/sessions/history')}
               >
-                View All Sessions
+                عرض جميع الجلسات
               </Button>
             </CardContent>
           </Card>
@@ -251,43 +251,43 @@ export default function UserProfilePage() {
           {/* Preferences */}
           <Card className="lg:col-span-3">
             <CardHeader>
-              <CardTitle>Account Preferences</CardTitle>
+              <CardTitle>إعدادات الحساب</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="border rounded-lg p-4">
-                  <h3 className="font-medium mb-2">Language</h3>
-                  <p className="text-gray-600 mb-4">Current: <span className="font-medium">{user.preferences.language}</span></p>
+                  <h3 className="font-medium mb-2">اللغة</h3>
+                  <p className="text-gray-600 mb-4">الحالية: <span className="font-medium">{user.preferences.language}</span></p>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => alert('Language settings will be implemented soon')}
+                    onClick={() => alert('سيتم تنفيذ إعدادات اللغة قريبًا')}
                   >
-                    Change Language
+                    تغيير اللغة
                   </Button>
                 </div>
                 
                 <div className="border rounded-lg p-4">
-                  <h3 className="font-medium mb-2">Notifications</h3>
-                  <p className="text-gray-600 mb-4">Status: <span className="font-medium">{user.preferences.notifications ? 'Enabled' : 'Disabled'}</span></p>
+                  <h3 className="font-medium mb-2">الإشعارات</h3>
+                  <p className="text-gray-600 mb-4">الحالة: <span className="font-medium">{user.preferences.notifications ? 'مفعلة' : 'معطلة'}</span></p>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => alert('Notification settings will be implemented soon')}
+                    onClick={() => alert('سيتم تنفيذ إعدادات الإشعارات قريبًا')}
                   >
-                    Manage Notifications
+                    إدارة الإشعارات
                   </Button>
                 </div>
                 
                 <div className="border rounded-lg p-4">
-                  <h3 className="font-medium mb-2">Anonymous Mode</h3>
-                  <p className="text-gray-600 mb-4">Status: <span className="font-medium">{user.preferences.anonymousMode ? 'Enabled' : 'Disabled'}</span></p>
+                  <h3 className="font-medium mb-2">الوضع المجهول</h3>
+                  <p className="text-gray-600 mb-4">الحالة: <span className="font-medium">{user.preferences.anonymousMode ? 'مفعل' : 'معطل'}</span></p>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => alert('Privacy settings will be implemented soon')}
+                    onClick={() => alert('سيتم تنفيذ إعدادات الخصوصية قريبًا')}
                   >
-                    Privacy Settings
+                    إعدادات الخصوصية
                   </Button>
                 </div>
               </div>
