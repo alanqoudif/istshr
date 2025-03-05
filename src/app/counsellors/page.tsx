@@ -122,7 +122,7 @@ export default function CounsellorsPage() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-2xl font-bold text-blue-600">
-                استشر
+                Istashr
               </Link>
             </div>
             <nav className="hidden md:flex space-x-8">
@@ -130,30 +130,30 @@ export default function CounsellorsPage() {
                 href="/dashboard"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                لوحة التحكم
+                Dashboard
               </Link>
               <Link
                 href="/counsellors"
                 className="text-blue-600 border-b-2 border-blue-600 px-3 py-2 text-sm font-medium"
               >
-                المستشارون
+                Counsellors
               </Link>
               <Link
                 href="/community"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                المجتمع
+                Community
               </Link>
               <Link
                 href="/about"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
-                عن المنصة
+                About
               </Link>
             </nav>
             <div className="flex items-center space-x-4">
               <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
-                م
+                U
               </div>
             </div>
           </div>
@@ -163,10 +163,10 @@ export default function CounsellorsPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            ابحث عن مستشارك
+            Find Your Counsellor
           </h1>
           <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-            تواصل مع مستشارين مؤهلين متخصصين في مختلف المجالات
+            Connect with qualified counsellors specialized in various fields
           </p>
         </div>
 
@@ -176,7 +176,7 @@ export default function CounsellorsPage() {
             <div className="flex-grow">
               <Input
                 type="text"
-                placeholder="ابحث بالاسم، التخصص، أو الكلمات المفتاحية..."
+                placeholder="Search by name, specialty, or keywords..."
                 leftIcon={<FaSearch />}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -189,7 +189,7 @@ export default function CounsellorsPage() {
                 value={selectedField}
                 onChange={(e) => setSelectedField(e.target.value)}
               >
-                <option value="">جميع التخصصات</option>
+                <option value="">All Specialties</option>
                 {Object.values(CounsellingField).map((field) => (
                   <option key={field} value={field}>
                     {field}
@@ -197,7 +197,7 @@ export default function CounsellorsPage() {
                 ))}
               </select>
               <Button leftIcon={<FaFilter />}>
-                المزيد من الفلاتر
+                More Filters
               </Button>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function CounsellorsPage() {
                         alt={counsellor.name}
                         className="h-16 w-16 rounded-full object-cover"
                       />
-                      <div className="mr-4">
+                      <div className="ml-4">
                         <h3 className="text-lg font-medium text-gray-900">
                           <Link href={`/counsellors/${counsellor.id}`} className="hover:text-blue-600">
                             {counsellor.name}
@@ -226,20 +226,20 @@ export default function CounsellorsPage() {
                         <div className="mt-1 flex items-center">
                           <div className="flex items-center">
                             <FaStar className="text-yellow-400 h-4 w-4" />
-                            <span className="mr-1 text-sm text-gray-600">{counsellor.rating}</span>
+                            <span className="ml-1 text-sm text-gray-600">{counsellor.rating}</span>
                           </div>
                           <span className="mx-1 text-gray-500">•</span>
-                          <span className="text-sm text-gray-500">{counsellor.reviewCount} تقييم</span>
+                          <span className="text-sm text-gray-500">{counsellor.reviewCount} reviews</span>
                           <span className="mx-1 text-gray-500">•</span>
-                          <span className="text-sm text-gray-500">{counsellor.yearsExperience} سنوات خبرة</span>
+                          <span className="text-sm text-gray-500">{counsellor.yearsExperience} years experience</span>
                         </div>
                       </div>
                     </div>
                     <div className="mt-4">
                       <div className="flex flex-wrap gap-2 mb-3">
-                        {counsellor.specialties.map((specialty) => (
+                        {counsellor.specialties.map((specialty, index) => (
                           <span
-                            key={`${counsellor.id}-${specialty}`}
+                            key={`${counsellor.id}-${specialty}-${index}`}
                             className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
                           >
                             {specialty}
@@ -248,32 +248,28 @@ export default function CounsellorsPage() {
                       </div>
                       <p className="text-sm text-gray-600 line-clamp-3">{counsellor.bio}</p>
                     </div>
-                    <div className="mt-4 flex justify-between items-center">
-                      <div className="text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">{counsellor.sessionPrice} ريال</span> / الجلسة
-                      </div>
-                      <Link href={`/counsellors/${counsellor.id}`}>
-                        <Button size="sm">
-                          عرض الملف الشخصي
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 px-6 py-3 border-t border-gray-100">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center text-gray-500">
-                        <FaCalendarAlt className="ml-1" />
-                        <span>متاح: {counsellor.availability.join('، ')}</span>
-                      </div>
-                      <div className="flex space-x-2">
-                        <span className="inline-flex items-center text-gray-500">
-                          <FaVideo className="ml-1" />
-                          فيديو
-                        </span>
-                        <span className="inline-flex items-center text-gray-500 mr-2">
-                          <FaPhone className="ml-1" />
-                          هاتف
-                        </span>
+                    <div className="mt-4 pt-4 border-t border-gray-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">${counsellor.sessionPrice}</p>
+                          <p className="text-xs text-gray-500">per session</p>
+                        </div>
+                        <div className="flex space-x-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            leftIcon={<FaCalendarAlt />}
+                            onClick={() => {}}
+                          >
+                            Book
+                          </Button>
+                          <Button
+                            size="sm"
+                            onClick={() => {}}
+                          >
+                            View Profile
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -281,10 +277,11 @@ export default function CounsellorsPage() {
               </Card>
             ))
           ) : (
-            <div className="col-span-3 text-center py-12">
-              <p className="text-gray-500 text-lg">
-                لم يتم العثور على مستشارين مطابقين لبحثك. يرجى تعديل معايير البحث.
-              </p>
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-500 text-lg">No counsellors found matching your criteria</p>
+              <Button className="mt-4" onClick={() => { setSearchTerm(''); setSelectedField(''); }}>
+                Clear Filters
+              </Button>
             </div>
           )}
         </div>
@@ -293,7 +290,7 @@ export default function CounsellorsPage() {
       <footer className="bg-white border-t border-gray-200 mt-12">
         <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500">
-            &copy; {new Date().getFullYear()} استشر. All rights reserved.
+            &copy; {new Date().getFullYear()} Istashr. All rights reserved.
           </p>
         </div>
       </footer>

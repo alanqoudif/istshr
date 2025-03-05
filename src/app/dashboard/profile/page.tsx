@@ -3,11 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaUser, FaEnvelope, FaPhone, FaCalendarAlt, FaEdit, FaArrowLeft } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaCalendar, FaEdit, FaArrowLeft, FaLock, FaSignOutAlt } from 'react-icons/fa';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { authService } from '@/lib/auth';
 import { UserRole } from '@/types';
+import { Input } from '@/components/ui/Input';
 
 // تعريف واجهة لبيانات المستخدم
 interface UserData {
@@ -237,7 +238,7 @@ export default function UserProfilePage() {
                       <div>
                         <p className="font-medium">جلسة مع د. {['سارة أحمد', 'محمد الفارسي', 'ليلى محمود'][index]}</p>
                         <div className="flex items-center text-sm text-gray-500 mt-1">
-                          <FaCalendarAlt className="ml-1" />
+                          <FaCalendar className="ml-1" />
                           <span>
                             {new Date(Date.now() - (index + 1) * 7 * 24 * 60 * 60 * 1000).toLocaleDateString('ar-SA')}
                           </span>

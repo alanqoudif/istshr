@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "استشر - منصة الاستشارات الرقمية",
-  description: "تواصل مع مستشارين خبراء للحصول على التوجيه والدعم",
+  title: "Istashr - Digital Counselling Platform",
+  description: "Connect with expert counsellors for guidance and support",
 };
 
 export default function RootLayout({
@@ -21,12 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="en">
       <body className={inter.className}>
         <ClientAuthInitializer />
         <Navigation />
         {children}
-        <BetaNotification language="ar" />
+        <BetaNotification language="en" />
       </body>
     </html>
   );
