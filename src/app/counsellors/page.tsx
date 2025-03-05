@@ -109,7 +109,7 @@ export default function CounsellorsPage() {
       counsellor.bio.toLowerCase().includes(searchTerm.toLowerCase());
       
     const matchesField = selectedField === '' || 
-      counsellor.specialties.includes(selectedField as CounsellingField);
+      counsellor.specialties.some(specialty => specialty === selectedField as CounsellingField);
     
     return matchesSearch && matchesField;
   });
@@ -237,9 +237,9 @@ export default function CounsellorsPage() {
                     </div>
                     <div className="mt-4">
                       <div className="flex flex-wrap gap-2 mb-3">
-                        {counsellor.specialties.map((specialty, index) => (
+                        {counsellor.specialties.map((specialty) => (
                           <span
-                            key={`${counsellor.id}-${specialty}-${index}`}
+                            key={`${counsellor.id}-${specialty}`}
                             className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
                           >
                             {specialty}

@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { FaCalendarAlt, FaUser, FaHistory, FaUsers, FaCog, FaBell, FaSearch } from 'react-icons/fa';
-import Card from '@/components/ui/Card';
+import { FaCalendarAlt, FaUser, FaHistory, FaCog, FaSearch } from 'react-icons/fa';
+import { Card } from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import { authService } from '@/lib/auth';
-import { AuthUser } from '@/lib/auth';
+import type { AuthUser } from '@/lib/auth';
 
 export default function Dashboard() {
   const router = useRouter();
