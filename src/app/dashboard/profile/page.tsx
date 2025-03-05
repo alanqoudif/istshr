@@ -9,10 +9,31 @@ import Button from '@/components/ui/Button';
 import { authService } from '@/lib/auth';
 import { UserRole } from '@/types';
 
+// تعريف واجهة لبيانات المستخدم
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  role: UserRole;
+  joinedDate: Date;
+  sessions: {
+    total: number;
+    upcoming: number;
+    completed: number;
+  };
+  preferences: {
+    language: string;
+    notifications: boolean;
+    anonymousMode: boolean;
+  };
+}
+
 export default function UserProfilePage() {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('personal');
   
   useEffect(() => {
     // Check if user is authenticated
@@ -22,16 +43,14 @@ export default function UserProfilePage() {
       return;
     }
     
-    // Fetch user profile data
-    setIsLoading(true);
-    
-    // Mock user data
-    const mockUserData = {
-      id: 'user-123',
-      name: currentUser.name || 'أحمد محمد',
-      email: currentUser.email || 'ahmed@example.com',
+    // In a real app, we would fetch user data from API
+    // For now, we'll use mock data
+    const mockUserData: UserData = {
+      id: '123',
+      name: 'محمد عبدالله',
+      email: 'mohammed@example.com',
       phone: '+966 50 123 4567',
-      role: currentUser.role || UserRole.USER,
+      role: UserRole.USER,
       joinedDate: new Date('2023-01-15'),
       sessions: {
         total: 8,
@@ -39,7 +58,7 @@ export default function UserProfilePage() {
         completed: 6
       },
       preferences: {
-        language: 'العربية',
+        language: 'ar',
         notifications: true,
         anonymousMode: false
       }

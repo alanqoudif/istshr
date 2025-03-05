@@ -25,9 +25,7 @@ export function seedDatabase() {
   // In a real application, this would interact with your database
   console.log('Seeding database with initial data...');
   
-  // Hash the admin password
-  const hashedPassword = simpleHash(adminUser.password);
-  
+  // Log admin user info
   console.log('Admin user created:');
   console.log(`Username: ${adminUser.username}`);
   console.log(`Password: ${adminUser.password} (stored as hashed in the database)`);
@@ -35,7 +33,7 @@ export function seedDatabase() {
   // In a real application, you would store this in your database
   // db.users.create({
   //   email: adminUser.username,
-  //   password: hashedPassword,
+  //   password: simpleHash(adminUser.password),
   //   name: adminUser.name,
   //   role: adminUser.role
   // });

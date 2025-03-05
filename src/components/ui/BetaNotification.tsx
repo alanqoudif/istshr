@@ -9,22 +9,18 @@ interface BetaNotificationProps {
 
 const BetaNotification: React.FC<BetaNotificationProps> = ({ language = 'ar' }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [hasBeenDismissed, setHasBeenDismissed] = useState(false);
 
   useEffect(() => {
     // Check if notification has been dismissed before
-    const dismissed = localStorage.getItem('istashr_beta_notification_dismissed');
+    const dismissed = localStorage.getItem('beta_notification_dismissed');
     if (dismissed === 'true') {
       setIsVisible(false);
-      setHasBeenDismissed(true);
     }
   }, []);
 
   const handleDismiss = () => {
     setIsVisible(false);
-    // Remember that user dismissed the notification
-    localStorage.setItem('istashr_beta_notification_dismissed', 'true');
-    setHasBeenDismissed(true);
+    localStorage.setItem('beta_notification_dismissed', 'true');
   };
 
   // If notification has been dismissed, don't render anything
