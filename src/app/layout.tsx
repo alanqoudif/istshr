@@ -5,7 +5,7 @@ import Navigation from "@/components/layout/Navigation";
 import ClientAuthInitializer from "@/components/auth/ClientAuthInitializer";
 import BetaNotification from "@/components/ui/BetaNotification";
 
-const inter = Inter({ subsets: ["latin", "arabic"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "استشر - منصة الاستشارات الرقمية",
